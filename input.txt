@@ -1,3 +1,0 @@
-output.txt
-
-Usage: ruby parking_lot_problem.rb input_file.txt > output.txt

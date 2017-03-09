@@ -167,3 +167,19 @@ Output: 6
 Input: slot_number_for_registration_number MH-04-AY-1111
 
 Output: Not found
+
+
+  parse_command("create_parking_lot 6")
+  parse_command("park KA-01-HH-1234 White")
+  parse_command("park KA-01-HH-9999 White")
+  parse_command("park KA-01-BB-0001 Black")
+  parse_command("park KA-01-HH-7777 Red")
+  parse_command("park KA-01-HH-2701 Blue")
+  parse_command("park KA-01-HH-3141 Black")
+  parse_command("leave 4c")
+  parse_command("status")
+  parse_command("park KA-01-P-333 White")
+  parse_command("park DL-12-AA-9999 White")
+  parse_command("registration_numbers_for_cars_with_colour White")
+  parse_command("slot_numbers_for_cars_with_colour White")
+  parse_command("slot_number_for_registration_number KA-01-HH-3141")
