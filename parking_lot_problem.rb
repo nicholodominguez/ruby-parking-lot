@@ -99,11 +99,15 @@ def slot_number_for_registration_number(plate_no)
   puts (if return_values.size > 0 then "#{return_values.join(", ")}\n" else "Not found\n" end)
 end
 
+def number?(input)
+  return (if input.match(/^\d+$/) == nil then false else true end)
+end  
+
 def parse_command(input)
   command, *parameters = input.split(" ")
   case command
   when "create_parking_lot"
-    if parameters.length == 1 and parameters[0].to_i > 0
+    if parameters.length == 1 and parameters[0].to_i > 0 and number?(parameters[0])
       create_parking_lot(parameters[0].to_i)
     else
       puts "Invalid no. of arguments for create_parking_lot. Usage: create_parking_lot <size>\n"
@@ -117,7 +121,7 @@ def parse_command(input)
     end
 
   when "leave" 
-    if parameters.length == 1 and parameters[0].to_i > 0 and parameters[0].to_i < $parking_lot.length
+    if parameters.length == 1 and parameters[0].to_i > 0 and parameters[0].to_i < $parking_lot.length and number?(parameters[0])
       leave(parameters[0].to_i)
     else
       puts "Invalid no. of arguments for leave. Usage: leave <slot_no>\n"
@@ -162,9 +166,13 @@ if ARGV.length == 0
   end
 else
   filename = ARGV[0]
-  File.open(filename, "r").each do |line|
-    if not line.strip.empty?
-      parse_command(line)   #=> Lorem ipsum etc.
+  if File.exists?filename
+    File.open(filename, "r").each do |line|
+      if not line.strip.empty?
+        parse_command(line)   #=> Lorem ipsum etc.
+      end
     end
+  else
+    puts "#{filename} does not exists"
   end
 end
