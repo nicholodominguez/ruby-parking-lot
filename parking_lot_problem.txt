@@ -183,3 +183,28 @@ Output: Not found
   parse_command("registration_numbers_for_cars_with_colour White")
   parse_command("slot_numbers_for_cars_with_colour White")
   parse_command("slot_number_for_registration_number KA-01-HH-3141")
+
+  
+1.  Pass in hourly rate & grace period on creation of parking lot
+(in this example, 10.00 per hour, 15 minutes grace period)
+`create_parking_lot 6 10.00 15`
+
+2.  Pass in current time on "park" call
+`park KA-01-HH-1234 White 08:00`
+`park LB-02-HH-5678 Black 08:00`
+
+3.  Change parameter for `leave` to take in registration number instead, and pass in current time on `leave` call, computing amount to be paid
+Input: `leave LB-02-HH-5678 08:15`
+Output: Slot 2 is free, paid 0.00 (grace period)
+
+Input: `leave KA-01-HH-1234 10:00`
+Output: Slot 1 is free, paid 20.00
+
+4.  `status` should also output total earnings so far & number of cars that entered and left
+
+5.  New command `log`
+Outputs cars that entered & left with timestamps, ordered by entry time
+
+Registration Number   Colour  Entry   Departure
+ABC123  Blue  10:00 12:00
+DEF456  Green 11:00 12:00
